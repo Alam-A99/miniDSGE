@@ -1,4 +1,4 @@
-# 📊 Simulasi Model DSGE: IS Curve, Phillips Curve & Taylor Rule
+# Simulasi Model DSGE: IS Curve, Phillips Curve & Taylor Rule
 
 Aplikasi interaktif menggunakan Streamlit yang memvisualisasikan dinamika makroekonomi dalam model DSGE sederhana. Simulasi melibatkan:
 
@@ -21,7 +21,7 @@ Aplikasi interaktif menggunakan Streamlit yang memvisualisasikan dinamika makroe
 
 ---
 
-## 📌 Struktur Model
+## Struktur Model
 
 ### 1. IS Curve (Permintaan Agregat Dinamis):
 
@@ -43,11 +43,11 @@ $$
 
 ---
 
-## 🚀 Cara Menjalankan Secara Lokal
+## Cara Menjalankan Secara Lokal
 
 1. Clone repositori:
 
    ```bash
-   git clone https://github.com/username/dsge-streamlit.git
-   cd dsge-streamlit
+    git clone https://github.com/Alam-A99/miniDSGE.git
+   cd miniDSGE
    ```
