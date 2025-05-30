@@ -53,9 +53,7 @@ $$
    ```
 ## 👤 Author
 
-**Syamsu Alam**  
-Dosen & Peneliti Ekonomi Digital  
-Universitas Negeri Makassar  
+**Alam Yin**      
 🌐 Website: [www.dataaksi.id](https://www.dataaksi.id)
 
 ## 📄 Lisensi
