@@ -36,6 +36,27 @@ fig.update_layout(title="Simulasi Dinamis DSGE", xaxis_title="Periode", yaxis_ti
 
 st.plotly_chart(fig)
 
+fig.update_layout(
+    title="Simulasi Dinamis DSGE: IS, Phillips Curve & Taylor Rule",
+    xaxis_title="Periode",
+    yaxis_title="Level",
+    legend=dict(x=0.05, y=0.95),
+    height=500,
+    width=900,
+    annotations=[
+        dict(
+            text="DSGE",
+            xref="paper", yref="paper",
+            x=0.5, y=0.5,
+            showarrow=False,
+            font=dict(size=80, color="rgba(200,200,200,0.2)"),
+            xanchor='center',
+            yanchor='middle',
+            layer='below'
+        )
+    ]
+)
+
 st.markdown("### Deskripsi Dinamis:")
 st.write("""
 - **Output Gap (xₜ)**: Mencerminkan selisih antara output aktual dan potensial. Jika output gap negatif, berarti ekonomi sedang lesu.
