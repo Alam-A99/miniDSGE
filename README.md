@@ -51,3 +51,15 @@ $$
     git clone https://github.com/Alam-A99/miniDSGE.git
    cd miniDSGE
    ```
+## 👤 Author
+
+**Syamsu Alam**  
+Dosen & Peneliti Ekonomi Digital  
+Universitas Negeri Makassar  
+🌐 Website: [www.dataaksi.id](https://www.dataaksi.id)
+
+## 📄 Lisensi
+
+Karya ini dilisensikan di bawah [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
+Creative Commons ©© 2025 [www.dataaksi.id](https://www.dataaksi.id)
