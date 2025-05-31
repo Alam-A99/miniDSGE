@@ -48,7 +48,7 @@ $$
 1. Clone repositori:
 
    ```bash
-    git clone https://github.com/Alam-A99/miniDSGE.git
+   git clone https://github.com/Alam-A99/miniDSGE.git
    cd miniDSGE
    ```
 ## 👤 Author
