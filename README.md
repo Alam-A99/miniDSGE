@@ -61,3 +61,60 @@ $$
 Karya ini dilisensikan di bawah [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
 Creative Commons ©© 2025 [www.dataaksi.id](https://www.dataaksi.id)
+
+
+
+
+graph TD
+    %% DEFINISI FASE
+    subgraph A_PELAKSANAAN [📋 A. PELAKSANAAN ASESMEN]
+        A1[1. FR.APL.01 Permohonan Sertifikasi]
+        A2[2. FR.APL.02 Asesmen Mandiri]
+        A3[3. Portofolio Asesi]
+        A4[4. FR.MAPA.01 Merencanakan Aktivitas & Proses]
+        A5[5. Referensi: Skema, Standar Kompetensi, Kelompok Pekerjaan]
+        A6[6. FR.MAPA.02 Peta Instrumen & Perencanaan]
+        A7[7. FR.AK.07 Ceklis Penyesuaian Wajar]
+        A8[9. FR.AK.01 Persetujuan Asesmen & Kerahasiaan]
+    end
+
+    subgraph INSTRUMEN [🔍 INSTRUMEN ASESMEN]
+        I1[10. FR.IA.01 Observasi / Simulasi]
+        I2[11. FR.IA.02 TPD Demonstrasi]
+        I3[12-20. Instrumen Pendukung\n(PMO, DIT, DPT PG/Essay,\nCVP, VPK, CRP, dll)]
+    end
+
+    subgraph B_KEPUTUSAN [⚖️ B. KEPUTUSAN]
+        B1[21. FR.AK.02 Rekaman Asesmen Kompetensi]
+        B2[22. FR.AK.03 Umpan Balik & Catatan Asesmen]
+    end
+
+    subgraph C_LAPORAN [📊 C. LAPORAN ASESMEN]
+        C1[23. FR.AK.05 Laporan Asesmen]
+        C2[24. FR.AK.06 Meninjau Proses Asesmen]
+    end
+
+    subgraph D_VALIDASI [✅ D. VALIDASI]
+        D1[25. FR.VA Kontribusi dalam Validasi Asesmen]
+    end
+
+    %% ALUR LOGIS
+    A1 --> A2 --> A3 --> A4
+    A4 --> A5
+    A4 --> A6
+    A6 --> A7
+    A8 --> A4
+    A6 --> INSTRUMEN
+    INSTRUMEN --> B1 --> B2 --> C1
+    C1 --> C2
+    C2 --> D1
+    
+    %% ALUR BANDING (Opsional)
+    C1 -.->|Jika Asesi Tidak Setuju| AK4[8. FR.AK.04 Formulir Banding]
+    AK4 -.->|Review Ulang| C1
+
+    %% STYLING
+    classDef phase fill:#f8f9fa,stroke:#495057,stroke-width:2px,rx:8px;
+    class A_PELAKSANA,INSTRUMEN,B_KEPUTUSAN,C_LAPORAN,D_VALIDASI phase;
+    classDef critical fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
+    class A4,A6,B1,C1 critical;
