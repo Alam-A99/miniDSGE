@@ -110,7 +110,8 @@ else:
     tradeoff_text = "Korelasi lemah menunjukkan proses dis-inflasi dan penyesuaian output berjalan relatif independen, konsisten dengan mekanisme *expectations anchoring* yang efektif melalui forward guidance implisit."
 
 # 2. Monetary Policy Rule & Determinacy
-taylor_text = "✅ **Prinsip Taylor Terpenuhi (φπ > 1)**: Respons suku bunga terhadap inflasi lebih dari satu-ke-satu. Suku bunga riil naik saat inflasi meningkat, menjamin determinasi keseimbangan (kondisi Blanchard-Kahn) dan mencegah ekspektasi inflasi *self-fulfilling*." if phi_pi > 1.0 else "⚠️ **Prinsip Taylor Dilanggar (φπ ≤ 1)**: Respons kebijakan terlalu lemah. Suku bunga riil tidak cukup naik saat inflasi melonjak, berisiko menimbulkan indeterminasi, volatilitas ekspektasi, dan potensi spiral inflasi-harga yang tidak terkendali."
+taylor_ok = phi_pi > 1.0  # Dipisahkan agar tidak terjadi error sintaks
+taylor_text = "✅ **Prinsip Taylor Terpenuhi (φπ > 1)**: Respons suku bunga terhadap inflasi lebih dari satu-ke-satu. Suku bunga riil naik saat inflasi meningkat, menjamin determinasi keseimbangan (kondisi Blanchard-Kahn) dan mencegah ekspektasi inflasi *self-fulfilling*." if taylor_ok else "⚠️ **Prinsip Taylor Dilanggar (φπ ≤ 1)**: Respons kebijakan terlalu lemah. Suku bunga riil tidak cukup naik saat inflasi melonjak, berisiko menimbulkan indeterminasi, volatilitas ekspektasi, dan potensi spiral inflasi-harga yang tidak terkendali."
 
 rho_text = "🔹 **Gradualism (ρ tinggi)**: Bank sentral mengutamakan stabilitas pasar keuangan dan menghindari kejutan kebijakan (*policy surprises*). Cocok untuk *anchoring* jangka panjang, namun dapat memperpanjang durasi dis-inflasi dan meningkatkan *output cost* penyesuaian." if rho > 0.6 else "🔹 **Aggressive Adjustment (ρ rendah)**: Respons langsung tanpa smoothing. Efektif untuk meredam shock cepat dan mengunci ekspektasi, namun berpotensi meningkatkan volatilitas suku bunga jangka pendek dan mengacaukan perencanaan intertemporal pelaku ekonomi."
 
@@ -118,7 +119,7 @@ rho_text = "🔹 **Gradualism (ρ tinggi)**: Bank sentral mengutamakan stabilita
 sigma_text = "🔹 **Elastisitas Permintaan Tinggi (σ besar)**: Konsumen sangat sensitif terhadap perubahan suku bunga riil. Transmisi kebijakan moneter ke sektor riil kuat, sehingga output gap cepat merespons, namun juga lebih rentan terhadap *volatility* akibat fluktuasi kebijakan." if sigma > 1.5 else "🔹 **Elastisitas Permintaan Rendah (σ kecil)**: Konsumsi cenderung di-*smooth* secara intertemporal. Transmisi kebijakan moneter ke output gap lebih lemah dan gradual, membuat penyesuaian sektor riil berjalan lambat namun stabil, mengurangi risiko overshooting output."
 
 # 4. Synthesis & Policy Implications
-if peak_i > peak_pi and taylor_ok := (phi_pi > 1.0):
+if peak_i > peak_pi and taylor_ok:
     synth_text = "📊 **Sintesis Kebijakan**: Puncak suku bunga yang melebihi puncak inflasi mengindikasikan stance moneter yang *credibly tight*. Bank sentral berhasil menaikkan suku bunga riil sesuai kerangka New Keynesian, menekan permintaan agregat melalui kurva IS, dan meng-*anchoring* ekspektasi inflasi melalui forward guidance implisit."
 elif rec_x > rec_pi and rho > 0.5:
     synth_text = "📊 **Sintesis Kebijakan**: Pemulihan output gap yang lebih lambat dibanding inflasi, dipadu dengan smoothing suku bunga tinggi, mencerminkan *policy trade-off klasik*: stabilitas nominal dicapai lebih cepat, sementara penyesuaian riil memakan waktu akibat rigiditas harga/wage dan transmisi IS yang gradual."
@@ -142,5 +143,4 @@ st.markdown(f"""
 • {synth_text}
 """)
 
-# Catatan Teoritis Singkat
 st.caption("📚 *Referensi Teoritis: Kerangka New Keynesian DSGE standar (Woodford, 2003; Gali, 2015). Determinasi keseimbangan dijamin oleh Prinsip Taylor (φπ>1), sedangkan trade-off inflasi-output muncul akibat nominal rigidities (κ) dan intertemporal substitution (σ).*)")
