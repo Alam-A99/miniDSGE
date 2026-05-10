@@ -57,7 +57,6 @@ st.divider()
 st.markdown("### 📊 Analisis Dinamis Berbasis Parameter")
 
 t_shock = 5
-# Batasi analisis pasca-shock agar tidak terpengaruh kondisi awal nol
 x_post = x[t_shock:]
 pi_post = pi[t_shock:]
 i_post = i[t_shock:]
@@ -68,16 +67,21 @@ idx_pi = t_shock + np.argmax(np.abs(pi_post))
 idx_i = t_shock + np.argmax(np.abs(i_post))
 peak_x, peak_pi, peak_i = x[idx_x], pi[idx_pi], i[idx_i]
 
-# 2. Waktu Pemulihan (kembali ke dalam ±5% steady state)
+# 2. Waktu Pemulihan (Kembali ke dalam ±5% steady state)
 def recovery_time(series, start_t=t_shock, threshold=0.05):
     for t in range(start_t, T):
         if abs(series[t]) < threshold:
             return t - start_t
-    return f"> {T - start_t}"
+    return T - start_t  # Selalu kembalikan int agar perbandingan aman
 
 rec_x = recovery_time(x)
 rec_pi = recovery_time(pi)
 rec_i = recovery_time(i)
+
+# Fungsi formatting untuk tampilan UI
+def fmt_recovery(val):
+    max_period = T - t_shock
+    return str(val) if val < max_period else f"> {max_period}"
 
 # 3. Statistik Lanjutan
 vol_x, vol_pi, vol_i = np.std(x_post), np.std(pi_post), np.std(i_post)
@@ -91,7 +95,7 @@ c3.metric("🏦 Puncak Suku Bunga", f"{peak_i:.3f}", f"Pada t={idx_i} | Vol: {vo
 
 st.markdown(f"""
 ⏱️ **Estimasi Waktu Pemulihan (ke ±{0.05:.0%} steady state):**
-- Output Gap: `{rec_x}` periode | Inflasi: `{rec_pi}` periode | Suku Bunga: `{rec_i}` periode
+- Output Gap: `{fmt_recovery(rec_x)}` periode | Inflasi: `{fmt_recovery(rec_pi)}` periode | Suku Bunga: `{fmt_recovery(rec_i)}` periode
 🔗 **Korelasi Inflasi-Output Gap (pasca shock):** `{corr_pi_x:.2f}`
 """)
 
@@ -104,7 +108,7 @@ else:
     st.warning("⚠️ Prinsip Taylor Dilanggar: `ϕπ ≤ 1` → Risiko indeterminasi & ekspektasi inflasi self-fulfilling.")
 
 smoothing_desc = "Tinggi" if rho > 0.7 else "Rendah" if rho < 0.3 else "Sedang"
-st.info(f"🔹 **Smoothing Suku Bunga**: {smoothing_desc} (`ρ = {rho:.2f}`) → {'Perubahan bertahap & menghindari volatility' if rho > 0.6 else 'Respons kebijakan lebih agresif & cepat'}")
+st.info(f"🔹 **Smoothing Suku Bunga**: {smoothing_desc} (`ρ = {rho:.2f}`) → {'Perubahan bertahap & menghindari volatilitas' if rho > 0.6 else 'Respons kebijakan lebih agresif & cepat'}")
 
 kappa_desc = "Kuat" if kappa > 0.15 else "Lemah" if kappa < 0.05 else "Moderat"
 st.info(f"🔹 **Sensitivitas Kurva Phillips**: {kappa_desc} (`κ = {kappa:.2f}`) → {'Inflasi sangat responsif terhadap slack riil' if kappa > 0.1 else 'Inflasi cenderung rigid terhadap perubahan output'}")
